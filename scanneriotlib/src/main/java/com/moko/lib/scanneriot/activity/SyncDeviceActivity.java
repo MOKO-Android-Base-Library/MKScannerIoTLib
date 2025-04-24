@@ -52,6 +52,7 @@ public class SyncDeviceActivity extends FragmentActivity implements BaseQuickAda
         mBind.rvDeviceList.setLayoutManager(new LinearLayoutManager(this));
         mBind.rvDeviceList.setAdapter(adapter);
         mHandler = new Handler(Looper.getMainLooper());
+        setContentView(mBind.getRoot());
     }
 
 
