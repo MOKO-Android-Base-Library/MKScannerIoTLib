@@ -4,11 +4,11 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.moko.lib.scannerui.dialog.MokoBaseDialog;
 import com.moko.lib.scanneriot.IoTDMConstants;
 import com.moko.lib.scanneriot.R;
 import com.moko.lib.scanneriot.databinding.DialogLogoutBinding;
 import com.moko.lib.scanneriot.utils.IoTDMSPUtils;
-import com.moko.lib.loraui.dialog.MokoBaseDialog;
 
 public class LogoutDialog extends MokoBaseDialog<DialogLogoutBinding> {
     public static final String TAG = LogoutDialog.class.getSimpleName();
@@ -21,14 +21,14 @@ public class LogoutDialog extends MokoBaseDialog<DialogLogoutBinding> {
 
     @Override
     protected void onCreateView() {
-        String acc = IoTDMSPUtils.getStringValue(getContext(), IoTDMConstants.SP_LOGIN_ACCOUNT, "");
+        String acc = IoTDMSPUtils.getStringValue(getContext(), IoTDMConstants.EXTRA_KEY_LOGIN_ACCOUNT, "");
         mBind.tvUsername.setText(acc);
         mBind.tvCancel.setOnClickListener(v -> {
             dismiss();
         });
         mBind.tvExit.setOnClickListener(v -> {
             dismiss();
-            IoTDMSPUtils.setStringValue(getContext(), IoTDMConstants.SP_LOGIN_PASSWORD, "");
+            IoTDMSPUtils.setStringValue(getContext(), IoTDMConstants.EXTRA_KEY_LOGIN_PASSWORD, "");
             if (LogoutClickListener != null)
                 LogoutClickListener.onExit();
         });

@@ -66,6 +66,7 @@ publishing {
 
 
 dependencies {
+    api 'com.google.code.gson:gson:2.10.1'
     api 'com.github.MOKO-Android-Base-Library:MKScannerUILib:1.0.1'
     api 'com.github.jeasonlzy.okhttp-OkGo:okgo:v3.0.4'
 }

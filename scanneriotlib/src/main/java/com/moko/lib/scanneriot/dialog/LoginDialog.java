@@ -9,8 +9,8 @@ import com.moko.lib.scanneriot.IoTDMConstants;
 import com.moko.lib.scanneriot.R;
 import com.moko.lib.scanneriot.databinding.DialogLoginBinding;
 import com.moko.lib.scanneriot.utils.IoTDMSPUtils;
-import com.moko.lib.loraui.dialog.MokoBaseDialog;
-import com.moko.lib.loraui.utils.ToastUtils;
+import com.moko.lib.scanneriot.utils.IoTDMToastUtils;
+import com.moko.lib.scannerui.dialog.MokoBaseDialog;
 
 public class LoginDialog extends MokoBaseDialog<DialogLoginBinding> {
     public static final String TAG = LoginDialog.class.getSimpleName();
@@ -23,9 +23,9 @@ public class LoginDialog extends MokoBaseDialog<DialogLoginBinding> {
 
     @Override
     protected void onCreateView() {
-        String acc = IoTDMSPUtils.getStringValue(getContext(), IoTDMConstants.SP_LOGIN_ACCOUNT, "");
-        String pwd = IoTDMSPUtils.getStringValue(getContext(), IoTDMConstants.SP_LOGIN_PASSWORD, "");
-        int env = IoTDMSPUtils.getIntValue(getContext(), IoTDMConstants.SP_LOGIN_ENV, 0);
+        String acc = IoTDMSPUtils.getStringValue(getContext(), IoTDMConstants.EXTRA_KEY_LOGIN_ACCOUNT, "");
+        String pwd = IoTDMSPUtils.getStringValue(getContext(), IoTDMConstants.EXTRA_KEY_LOGIN_PASSWORD, "");
+        int env = IoTDMSPUtils.getIntValue(getContext(), IoTDMConstants.EXTRA_KEY_LOGIN_ENV, 0);
         mBind.etAccount.setText(acc);
         mBind.etPassword.setText(pwd);
         if (env == 0)
@@ -39,7 +39,7 @@ public class LoginDialog extends MokoBaseDialog<DialogLoginBinding> {
             String account = mBind.etAccount.getText().toString();
             String password = mBind.etPassword.getText().toString();
             if (TextUtils.isEmpty(account) || TextUtils.isEmpty(password)) {
-                ToastUtils.showToast(getContext(), "Cannot be empty!");
+                IoTDMToastUtils.showToast(getContext(), "Cannot be empty!");
                 return;
             }
             int env_confirm = 0;

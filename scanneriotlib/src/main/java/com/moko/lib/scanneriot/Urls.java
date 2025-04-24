@@ -12,11 +12,11 @@ public class Urls {
     /**
      * 测试环境
      */
-    private static final String HOST_URL_TEST = "https://testiotdm.mokotechnology.com/prod-api/";
+    private static final String HOST_URL_TEST = "https://test.mokocloud.com/prod-api/";
     /**
      * 正式环境
      */
-    private static final String HOST_URL_CLOUD = "https://cloud.mokotechnology.com/stage-api/";
+    private static final String HOST_URL_CLOUD = "http://cloud.mokotechnology.com/stage-api/";
 
     /**
      * 生产测试
@@ -36,7 +36,7 @@ public class Urls {
     //}
 
     // 同步网关
-    private static final String URL_SYNC_GATEWAY = "mqtt/lora/createLoraFromApp";
+    private static final String URL_SYNC_GATEWAY = "mqtt/mqttgateway/batchAdd";
     // req:
     // [{"macName":"","mac":"","model":"","publishTopic":"","subscribeTopic":"","lastWill":""}]
     // resp:
