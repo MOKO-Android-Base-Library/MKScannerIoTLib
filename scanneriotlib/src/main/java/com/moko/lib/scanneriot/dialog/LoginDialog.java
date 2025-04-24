@@ -9,8 +9,8 @@ import com.moko.lib.scanneriot.IoTDMConstants;
 import com.moko.lib.scanneriot.R;
 import com.moko.lib.scanneriot.databinding.DialogLoginBinding;
 import com.moko.lib.scanneriot.utils.IoTDMSPUtils;
-import com.moko.lib.scanneriot.utils.IoTDMToastUtils;
 import com.moko.lib.scannerui.dialog.MokoBaseDialog;
+import com.moko.lib.scannerui.utils.ToastUtils;
 
 public class LoginDialog extends MokoBaseDialog<DialogLoginBinding> {
     public static final String TAG = LoginDialog.class.getSimpleName();
@@ -39,7 +39,7 @@ public class LoginDialog extends MokoBaseDialog<DialogLoginBinding> {
             String account = mBind.etAccount.getText().toString();
             String password = mBind.etPassword.getText().toString();
             if (TextUtils.isEmpty(account) || TextUtils.isEmpty(password)) {
-                IoTDMToastUtils.showToast(getContext(), "Cannot be empty!");
+                ToastUtils.showToast(getContext(), "Cannot be empty!");
                 return;
             }
             int env_confirm = 0;

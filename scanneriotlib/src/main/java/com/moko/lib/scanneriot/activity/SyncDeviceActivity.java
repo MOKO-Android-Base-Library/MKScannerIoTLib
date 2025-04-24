@@ -22,8 +22,8 @@ import com.moko.lib.scanneriot.databinding.ActivityDevicesBinding;
 import com.moko.lib.scanneriot.dialog.LogoutDialog;
 import com.moko.lib.scanneriot.entity.CommonResp;
 import com.moko.lib.scanneriot.entity.SyncDevice;
-import com.moko.lib.scanneriot.utils.IoTDMToastUtils;
 import com.moko.lib.scannerui.dialog.LoadingDialog;
+import com.moko.lib.scannerui.utils.ToastUtils;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -58,7 +58,7 @@ public class SyncDeviceActivity extends FragmentActivity implements BaseQuickAda
     public void onSyncDevices(View view) {
         if (isWindowLocked()) return;
         if (devices.isEmpty()) {
-            IoTDMToastUtils.showToast(this, "Add devices first");
+            ToastUtils.showToast(this, "Add devices first");
             return;
         }
         List<SyncDevice> syncDevices = adapter.getData();
@@ -84,15 +84,15 @@ public class SyncDeviceActivity extends FragmentActivity implements BaseQuickAda
                         }.getType();
                         CommonResp<JsonObject> commonResp = new Gson().fromJson(response.body(), type);
                         if (commonResp.code != 200) {
-                            IoTDMToastUtils.showToast(SyncDeviceActivity.this, commonResp.msg);
+                            ToastUtils.showToast(SyncDeviceActivity.this, commonResp.msg);
                             return;
                         }
-                        IoTDMToastUtils.showToast(SyncDeviceActivity.this, "Sync Success");
+                        ToastUtils.showToast(SyncDeviceActivity.this, "Sync Success");
                     }
 
                     @Override
                     public void onError(Response<String> response) {
-                        IoTDMToastUtils.showToast(SyncDeviceActivity.this, R.string.request_error);
+                        ToastUtils.showToast(SyncDeviceActivity.this, R.string.request_error);
                     }
 
                     @Override
