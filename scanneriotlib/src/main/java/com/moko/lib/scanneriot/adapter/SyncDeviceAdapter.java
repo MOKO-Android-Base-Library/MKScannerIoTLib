@@ -16,6 +16,6 @@ public class SyncDeviceAdapter extends BaseQuickAdapter<SyncDevice, BaseViewHold
     protected void convert(BaseViewHolder helper, SyncDevice item) {
         helper.setText(R.id.tv_name, item.macName);
         helper.setText(R.id.tv_mac, item.mac);
-        helper.setImageResource(R.id.iv_select, item.isSelected ? R.drawable.ic_selected : R.drawable.ic_unselected);
+        helper.setImageResource(R.id.iv_select, item.isSelected ? R.drawable.ic_rb_selected : R.drawable.ic_rb_unselected);
     }
 }
