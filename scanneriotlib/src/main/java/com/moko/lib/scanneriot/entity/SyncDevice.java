@@ -21,7 +21,7 @@ public class SyncDevice implements Parcelable {
     // MKGW1 80
     // LW003-B 90
     // SGWP-B 100
-    // JP 200
+    // MKGW4 200
     public String model;
 
     public boolean isSelected;

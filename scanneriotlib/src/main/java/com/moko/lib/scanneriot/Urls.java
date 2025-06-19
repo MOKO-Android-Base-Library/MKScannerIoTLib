@@ -37,6 +37,9 @@ public class Urls {
 
     // 同步网关
     private static final String URL_SYNC_GATEWAY = "mqtt/mqttGateway/batchAdd";
+    // 同步网管（MKGW4）
+    private static final String URL_SYNC_CELLULAR_GATEWAY = "mqtt/mqttGateway/cellular/batchAdd";
+
     // req:
     // [{"macName":"","mac":"","model":"","publishTopic":"","subscribeTopic":"","lastWill":""}]
     // resp:
@@ -66,5 +69,9 @@ public class Urls {
 
     public static String syncGatewayApi(Context context) {
         return getUrl(context) + URL_SYNC_GATEWAY;
+    }
+
+    public static String syncCellularGatewayApi(Context context) {
+        return getUrl(context) + URL_SYNC_CELLULAR_GATEWAY;
     }
 }

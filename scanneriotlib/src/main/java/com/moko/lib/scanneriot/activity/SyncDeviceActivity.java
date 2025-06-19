@@ -39,12 +39,14 @@ public class SyncDeviceActivity extends FragmentActivity implements BaseQuickAda
     private ArrayList<SyncDevice> devices;
     private SyncDeviceAdapter adapter;
     public Handler mHandler;
+    private int mDeviceModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBind = ActivityDevicesBinding.inflate(getLayoutInflater());
         devices = getIntent().getParcelableArrayListExtra(IoTDMConstants.EXTRA_KEY_SYNC_DEVICES);
+        mDeviceModel = getIntent().getIntExtra(IoTDMConstants.EXTRA_KEY_DEVICE_MODEL, 0);
         adapter = new SyncDeviceAdapter();
         adapter.openLoadAnimation();
         adapter.replaceData(devices);
@@ -70,7 +72,10 @@ public class SyncDeviceActivity extends FragmentActivity implements BaseQuickAda
 
     private void syncDevices(List<SyncDevice> syncDevices) {
         RequestBody body = RequestBody.create(Urls.JSON, new Gson().toJson(syncDevices));
-        OkGo.<String>post(Urls.syncGatewayApi(getApplicationContext()))
+        String url = Urls.syncGatewayApi(getApplicationContext());
+        if (mDeviceModel == 200)
+            url = Urls.syncCellularGatewayApi(getApplicationContext());
+        OkGo.<String>post(url)
                 .upRequestBody(body)
                 .execute(new StringCallback() {
 
