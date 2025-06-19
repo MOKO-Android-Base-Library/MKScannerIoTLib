@@ -36,7 +36,7 @@ public class Urls {
     //}
 
     // 同步网关
-    private static final String URL_SYNC_GATEWAY = "mqtt/mqttgateway/batchAdd";
+    private static final String URL_SYNC_GATEWAY = "mqtt/mqttGateway/batchAdd";
     // req:
     // [{"macName":"","mac":"","model":"","publishTopic":"","subscribeTopic":"","lastWill":""}]
     // resp:
