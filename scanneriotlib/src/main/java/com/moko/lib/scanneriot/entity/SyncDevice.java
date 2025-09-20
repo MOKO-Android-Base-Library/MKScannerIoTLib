@@ -12,8 +12,11 @@ public class SyncDevice implements Parcelable {
     public String publishTopic;
     public String subscribeTopic;
     // MKGW-mini 01 10
+    // MKGW-mini 03-20D 11
+    // MKGW-mini 02-32D 12
     // MK107 20
-    // MK107D Pro 30
+    // MK107 Pro-32D 25
+    // MK107D Pro-35D 30
     // MK110 Plus 01 40
     // MK110 Plus 02 50
     // MK110 Plus 03 60

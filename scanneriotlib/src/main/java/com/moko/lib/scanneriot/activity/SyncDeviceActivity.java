@@ -73,7 +73,7 @@ public class SyncDeviceActivity extends FragmentActivity implements BaseQuickAda
     private void syncDevices(List<SyncDevice> syncDevices) {
         RequestBody body = RequestBody.create(Urls.JSON, new Gson().toJson(syncDevices));
         String url = Urls.syncGatewayApi(getApplicationContext());
-        if (mDeviceModel == 200)
+        if (mDeviceModel >= 200)
             url = Urls.syncCellularGatewayApi(getApplicationContext());
         OkGo.<String>post(url)
                 .upRequestBody(body)
