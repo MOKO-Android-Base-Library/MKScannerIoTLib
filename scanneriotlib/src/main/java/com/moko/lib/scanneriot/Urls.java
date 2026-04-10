@@ -39,6 +39,8 @@ public class Urls {
     private static final String URL_SYNC_GATEWAY = "mqtt/mqttGateway/batchAdd";
     // 同步网管（MKGW4）
     private static final String URL_SYNC_CELLULAR_GATEWAY = "mqtt/mqttGateway/cellular/batchAdd";
+    // 同步LORA
+    private static final String URL_SYNC_LORA_DEVICE = "mqtt/lora/createLoraFromApp";
 
     // req:
     // [{"macName":"","mac":"","model":"","publishTopic":"","subscribeTopic":"","lastWill":""}]
@@ -73,5 +75,9 @@ public class Urls {
 
     public static String syncCellularGatewayApi(Context context) {
         return getUrl(context) + URL_SYNC_CELLULAR_GATEWAY;
+    }
+
+    public static String syncLoRaDeviceApi(Context context) {
+        return getUrl(context) + URL_SYNC_LORA_DEVICE;
     }
 }
