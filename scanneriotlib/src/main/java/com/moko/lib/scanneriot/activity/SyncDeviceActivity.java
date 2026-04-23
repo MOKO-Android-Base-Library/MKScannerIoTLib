@@ -1,10 +1,16 @@
 package com.moko.lib.scanneriot.activity;
 
+import android.content.res.Configuration;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
+import android.view.DisplayCutout;
 import android.view.View;
+import android.view.WindowInsets;
+import android.view.WindowManager;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
@@ -30,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.Nullable;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import okhttp3.RequestBody;
@@ -44,6 +51,67 @@ public class SyncDeviceActivity extends FragmentActivity implements BaseQuickAda
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 设置全屏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            );
+            // 透明导航栏
+            getWindow().setNavigationBarColor(Color.TRANSPARENT);
+
+            // Android P及以上支持刘海屏
+            WindowManager.LayoutParams params = getWindow().getAttributes();
+            params.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+            getWindow().setAttributes(params);
+
+            // 设置WindowInsets监听
+            getWindow().getDecorView().setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
+                private int lastOrientation = -1;
+
+                @Override
+                public WindowInsets onApplyWindowInsets(View v, WindowInsets insets) {
+                    DisplayCutout cutout = insets.getDisplayCutout();
+                    if (cutout != null) {
+                        // 获取当前方向
+                        int currentOrientation = getResources().getConfiguration().orientation;
+
+                        // 只有当方向改变时才重新设置padding
+                        if (currentOrientation != lastOrientation) {
+                            lastOrientation = currentOrientation;
+
+                            if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+                                // 横屏：只考虑左右安全区域
+                                v.setPadding(cutout.getSafeInsetLeft(), 0,
+                                        cutout.getSafeInsetRight(), 0);
+                            } else {
+                                int bottomInset = 0;
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                                    bottomInset = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom;
+                                }
+                                // 竖屏：使用全部安全区域
+                                v.setPadding(cutout.getSafeInsetLeft(), cutout.getSafeInsetTop(),
+                                        cutout.getSafeInsetRight(), cutout.getSafeInsetBottom() + bottomInset);
+                            }
+
+                            // 请求重新布局
+                            v.requestLayout();
+                        }
+                    } else {
+                        int bottomInset = 0;
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                            bottomInset = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom;
+                        }
+                        // 没有刘海屏时重置padding
+                        v.setPadding(0, 0, 0, bottomInset);
+                        lastOrientation = -1;
+                    }
+
+                    return insets;
+                }
+            });
+        }
         mBind = ActivityDevicesBinding.inflate(getLayoutInflater());
         devices = getIntent().getParcelableArrayListExtra(IoTDMConstants.EXTRA_KEY_SYNC_DEVICES);
         mDeviceModel = getIntent().getIntExtra(IoTDMConstants.EXTRA_KEY_DEVICE_MODEL, 0);
