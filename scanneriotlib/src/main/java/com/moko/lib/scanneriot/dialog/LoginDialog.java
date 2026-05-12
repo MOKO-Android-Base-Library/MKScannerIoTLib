@@ -3,6 +3,7 @@ package com.moko.lib.scanneriot.dialog;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.moko.lib.scanneriot.IoTDMConstants;
@@ -15,7 +16,6 @@ import com.moko.lib.scannerui.utils.ToastUtils;
 public class LoginDialog extends MokoBaseDialog<DialogLoginBinding> {
     public static final String TAG = LoginDialog.class.getSimpleName();
 
-
     @Override
     protected DialogLoginBinding getViewBind(LayoutInflater inflater, ViewGroup container) {
         return DialogLoginBinding.inflate(inflater, container, false);
@@ -26,8 +26,10 @@ public class LoginDialog extends MokoBaseDialog<DialogLoginBinding> {
         String acc = IoTDMSPUtils.getStringValue(getContext(), IoTDMConstants.EXTRA_KEY_LOGIN_ACCOUNT, "");
         String pwd = IoTDMSPUtils.getStringValue(getContext(), IoTDMConstants.EXTRA_KEY_LOGIN_PASSWORD, "");
         int env = IoTDMSPUtils.getIntValue(getContext(), IoTDMConstants.EXTRA_KEY_LOGIN_ENV, 0);
+        boolean isRelease = IoTDMSPUtils.getBooleanValue(getContext(), IoTDMConstants.EXTRA_KEY_IS_RELEASE, false);
         mBind.etAccount.setText(acc);
         mBind.etPassword.setText(pwd);
+        mBind.rgEnv.setVisibility(isRelease ? View.GONE : View.VISIBLE);
         if (env == 0)
             mBind.rbEnvCloud.setChecked(true);
         else

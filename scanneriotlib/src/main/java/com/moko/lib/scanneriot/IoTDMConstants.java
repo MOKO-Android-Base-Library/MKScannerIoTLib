@@ -55,6 +55,7 @@ public class IoTDMConstants {
     public static final String EXTRA_KEY_LOGIN_ACCOUNT = "EXTRA_KEY_LOGIN_ACCOUNT";
     public static final String EXTRA_KEY_LOGIN_PASSWORD = "EXTRA_KEY_LOGIN_PASSWORD";
     public static final String EXTRA_KEY_LOGIN_ENV = "EXTRA_KEY_LOGIN_ENV";
+    public static final String EXTRA_KEY_IS_RELEASE = "EXTRA_KEY_IS_RELEASE";
     public static final String EXTRA_KEY_SYNC_DEVICES = "EXTRA_KEY_SYNC_DEVICES";
     public static final String EXTRA_KEY_DEVICE_MODEL = "EXTRA_KEY_DEVICE_MODEL";
     // request_code
