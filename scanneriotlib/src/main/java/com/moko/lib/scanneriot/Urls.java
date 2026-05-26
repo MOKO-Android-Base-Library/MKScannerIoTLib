@@ -12,11 +12,11 @@ public class Urls {
     /**
      * 测试环境
      */
-    private static final String HOST_URL_TEST = "https://testiotdm.mokotechnology.com/prod-api/";
+    private static final String HOST_URL_TEST = "https://testiotdm.mokocloud.com/prod-api/";
     /**
      * 正式环境
      */
-    private static final String HOST_URL_CLOUD = "https://cloud.mokotechnology.com/stage-api/";
+    private static final String HOST_URL_CLOUD = "https://iotdm.mokocloud.com/stage-api/";
 
     /**
      * 生产测试
